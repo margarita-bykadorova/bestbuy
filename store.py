@@ -1,51 +1,57 @@
-import products
-
 class Store:
-    def __init__(self, products: list):
+    """
+    Represents a store that holds and manages a collection of products.
+    """
+
+    def __init__(self, products):
+        """
+        Initialize a new Store.
+        """
         self.products = products
 
+
     def add_product(self, product):
-        """Adds a product to the store."""
+        """
+        Add a product to the store.
+        """
         self.products.append(product)
 
+
     def remove_product(self, product):
-        """Removes a product from the store."""
+        """
+        Remove a product from the store.
+        """
         self.products.remove(product)
 
-    def get_total_quantity(self) -> int:
-        """Returns how many items are in the store in total."""
+
+    def get_total_quantity(self):
+        """
+        Return the total number of items in the store (int).
+        """
         total_quantity = 0
         for product in self.products:
             total_quantity += product.get_quantity()
         return total_quantity
 
-    def get_all_products(self) -> list:
-        """Returns all products in the store that are active."""
-        all_products = []
+
+    def get_all_products(self):
+        """
+        Return a list of all active products in the store.
+        """
+        active_products = []
         for product in self.products:
             if product.is_active():
-                all_products.append(product)
-        return all_products
+                active_products.append(product)
+        return active_products
 
-    def order(self, shopping_list) -> float:
-        """Gets a list of tuples, where each tuple has 2 items:
-        Product (Product class) and quantity (int).
-        Buys the products and returns the total price of the order."""
+
+    def order(self, shopping_list):
+        """
+        Buy multiple products and return the total cost (float).
+        """
         total_price = 0
-        for item in shopping_list:
-            product, quantity = item
-            price = product.buy(quantity)
-            total_price += price
+
+        for product, quantity in shopping_list:
+            total_price += product.buy(quantity)
+
         return total_price
-
-
-#test
-product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
-                products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                products.Product("Google Pixel 7", price=500, quantity=250),
-               ]
-
-best_buy = Store(product_list)
-products = best_buy.get_all_products()
-print(best_buy.get_total_quantity())
-print(best_buy.order([(products[0], 1), (products[1], 2)]))
