@@ -22,7 +22,7 @@ def print_menu():
 
 def get_menu_choice():
     """
-    Prompt user for a menu choice (1–4) and return it.
+    Prompt the user for a menu choice (1–4) and return it.
     """
     while True:
         try:
@@ -69,7 +69,7 @@ def ask_for_product(active):
         return ask_for_product(active)
 
     index = int(raw)
-    if not (1 <= index <= len(active)):
+    if index < 1 or index > len(active):
         print("No such product number.")
         return ask_for_product(active)
 
@@ -138,7 +138,7 @@ def make_order(store):
 
     try:
         total = store.order(shopping_list)
-    except Exception as error:
+    except ValueError as error:
         print(f"Order failed: {error}")
         return
 

@@ -52,6 +52,8 @@ class Store:
         total_price = 0
 
         for product, quantity in shopping_list:
+            if product not in self.products:
+                raise ValueError("Product not in store")
             total_price += product.buy(quantity)
 
         return total_price

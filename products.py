@@ -81,7 +81,7 @@ class Product:
         Raise ValueError if quantity is invalid or exceeds stock.
         """
         if not self.active:
-            raise Exception("Product is not active.")
+            raise ValueError("Product is not active.")
         if quantity <= 0:
             raise ValueError("Purchase quantity must be a positive integer.")
         if quantity > self.quantity:
